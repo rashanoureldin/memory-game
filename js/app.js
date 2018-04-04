@@ -46,7 +46,6 @@ function shuffle(array) {
 function startGame (){
 
 cards = shuffle(cards);
-console.log(cards);
 for (let i = 0 ;i< cards.length; i++) {
 
  	deck.innerHTML = "";
@@ -94,13 +93,22 @@ function openCards(){
 function matched(){
 	openedCards[0].classList.add('match');
 	openedCards[1].classList.add('match');
+	openedCards[0].classList.remove("show", "open");
+    openedCards[1].classList.remove("show", "open");
     openedCards = [];
 }
 function unmatched(){
 	openedCards[0].classList.remove('match');
 	openedCards[1].classList.remove('match');
-	openedCards = [];
-}
+	setTimeout(function() {
+		openedCards[0].classList.remove("show", "open");
+		openedCards[1].classList.remove("show", "open");
+		openedCards = [];
+	}, 800);
 
+}
+function disabled(){
+
+}
 
 	

@@ -7,7 +7,7 @@
  const deck = document.querySelector('.deck'); 
  let openedCards = [];
  let moves = 0;
- let moveCounter =  document.getElementsByClassName("moves"); 
+ let moveCounter = document.querySelector(".moves");
 
 /*
  * Display the cards on the page

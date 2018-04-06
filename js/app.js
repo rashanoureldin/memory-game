@@ -6,6 +6,9 @@
  let cards = [...card];
  const deck = document.querySelector('.deck'); 
  let openedCards = [];
+ let moves = 0;
+ let moveCounter =  document.getElementsByClassName("moves"); 
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -46,6 +49,7 @@ function shuffle(array) {
 function startGame (){
 
 cards = shuffle(cards);
+
 for (let i = 0 ;i< cards.length; i++) {
 
  	deck.innerHTML = "";
@@ -63,9 +67,11 @@ for (let i = 0 ;i< cards.length; i++) {
 }
 
 var openCard = function(){
+
 		this.classList.toggle("open");
 		this.classList.toggle("show");
-	}
+		this.classList.toggle("disabled");
+}
 
 
 for (var i = 0; i < cards.length; i++){
@@ -74,12 +80,13 @@ for (var i = 0; i < cards.length; i++){
    card.addEventListener("click", openCard);
    card.addEventListener("click", openCards);
 
-
 }
+
 function openCards(){
 	openedCards.push(this);
 	let cardLength = openedCards.length;
 	if(cardLength === 2){
+		movesCounter();
 		if(openedCards[0].innerHTML === openedCards[1].innerHTML){
 			matched();
 		}else{
@@ -98,8 +105,7 @@ function matched(){
     openedCards = [];
 }
 function unmatched(){
-	openedCards[0].classList.remove('match');
-	openedCards[1].classList.remove('match');
+	
 	setTimeout(function() {
 		openedCards[0].classList.remove("show", "open");
 		openedCards[1].classList.remove("show", "open");
@@ -111,4 +117,7 @@ function disabled(){
 
 }
 
-	
+function movesCounter(){
+	moves++;
+	moveCounter.innerHTML = moves;
+}	

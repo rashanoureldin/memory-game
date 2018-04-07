@@ -70,7 +70,7 @@ var openCard = function(){
 
 		this.classList.toggle("open");
 		this.classList.toggle("show");
-		this.classList.toggle("disabled");
+		// this.classList.toggle("disabled");
 }
 
 
@@ -115,10 +115,16 @@ function unmatched(){
 
 }
 function disabled(){
-	card.classList.add('disabled');
+	for(var i = 0; i < cards.length; i++){
+            card.classList.add('disabled');
+        }
+	
 }
 function enable(){
- card.classList.remove('disabled');
+	for(var i = 0; i < cards.length; i++){
+            card.classList.remove('disabled');
+        }
+ 
         for(var i = 0; i < matchedCard.length; i++){
             matchedCard[i].classList.add("disabled");
         }

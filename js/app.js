@@ -8,7 +8,7 @@
  let openedCards = [];
  let moves = 0;
  let moveCounter = document.querySelector(".moves");
-
+ let matchedCard = document.getElementsByClassName("match");
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -60,7 +60,7 @@ for (let i = 0 ;i< cards.length; i++) {
             deck.appendChild(item);
         });
 
-  cards[i].classList.remove("show", "open", "match");
+  cards[i].classList.remove("show", "open", "match","disabled");
  };
 
 
@@ -98,26 +98,34 @@ function openCards(){
 }
 
 function matched(){
-	openedCards[0].classList.add('match');
-	openedCards[1].classList.add('match');
+	openedCards[0].classList.add('match','disabled');
+	openedCards[1].classList.add('match','disabled');
 	openedCards[0].classList.remove("show", "open");
     openedCards[1].classList.remove("show", "open");
     openedCards = [];
 }
 function unmatched(){
-	
+	disabled();
 	setTimeout(function() {
 		openedCards[0].classList.remove("show", "open");
 		openedCards[1].classList.remove("show", "open");
+		enable();
 		openedCards = [];
 	}, 800);
 
 }
 function disabled(){
-
+	card.classList.add('disabled');
 }
-
+function enable(){
+ card.classList.remove('disabled');
+        for(var i = 0; i < matchedCard.length; i++){
+            matchedCard[i].classList.add("disabled");
+        }
+}
 function movesCounter(){
 	moves++;
 	moveCounter.innerHTML = moves;
 }	
+// moveCounter[0].innerHTML = moves
+// let moveCounter = document.getElementsByClassName("moves")

@@ -9,6 +9,7 @@
  let moves = 0;
  let moveCounter = document.querySelector(".moves");
  let matchedCard = document.getElementsByClassName("match");
+ let stars = document.querySelectorAll(".fa-star");
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -46,22 +47,23 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
 function startGame (){
 
-cards = shuffle(cards);
+	cards = shuffle(cards);
 
-for (let i = 0 ;i< cards.length; i++) {
+	for (let i = 0 ;i< cards.length; i++) {
 
- 	deck.innerHTML = "";
- 	
- 	
- [].forEach.call(cards, function(item) {
+	 	deck.innerHTML = "";
+	 	
+	 	
+	 [].forEach.call(cards, function(item) {
 
-            deck.appendChild(item);
-        });
+	            deck.appendChild(item);
+	        });
 
-  cards[i].classList.remove("show", "open", "match","disabled");
- };
+	  cards[i].classList.remove("show", "open", "match","disabled");
+	 };
 
 
 }
@@ -132,6 +134,45 @@ function enable(){
 function movesCounter(){
 	moves++;
 	moveCounter.innerHTML = moves;
+	if(moves == 1){
+        second = 0;
+        minute = 0; 
+        hour = 0;
+        startTimer();
+    }
+    rating();
 }	
 // moveCounter[0].innerHTML = moves
 // let moveCounter = document.getElementsByClassName("moves")
+
+var second = 0, minute = 0; hour = 0;
+var timer = document.querySelector(".timer");
+var interval;
+function startTimer(){
+    interval = setInterval(function(){
+        timer.innerHTML = minute+"mins "+second+"secs";
+        second++;
+        if(second == 60){
+            minute++;
+            second=0;
+        }
+        if(minute == 60){
+            hour++;
+            minute = 0;
+        }
+    },1000);
+}
+
+function rating(){
+	
+	stars.classList.remove("fa fa-star");
+	if (moves > 8 && moves < 12){
+		for(let i = 0; i<= stars.length; i++){
+			stars.classList.add("fa fa-star-o");
+		}
+	}else if(moves > 12){
+		for(let i = 0; i<= stars.length; i++){
+			stars.classList.add("fa fa-star-o");
+		}
+	}
+}

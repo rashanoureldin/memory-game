@@ -10,10 +10,12 @@
 	 let moveCounter = document.querySelector(".moves");
 	 let matchedCard = document.getElementsByClassName("match");
 	 let stars = document.querySelectorAll(".fa-star");
-	 const restartGame = document.querySelector(".restart");
+	 let restartGame = document.querySelector(".restart");
 	 let second = 0, minute = 0; hour = 0;
 	let timer = document.querySelector(".timer");
 	let interval;
+	let modal = document.querySelector('.modal');
+	let closeicon = document.querySelector(".close");
 
 	/*
 	 * Display the cards on the page
@@ -71,16 +73,16 @@
 
 	 		cards[i].classList.remove("show", "open", "match","disabled");
 	 	}
-	 	resetTime();
 	 	resetMoves();
 	 	resetRate();
+	 	resetTime();
 	 }
 
 	 var openCard = function(){
 
 	 	this.classList.toggle("open");
 	 	this.classList.toggle("show");
-	 	
+
 		}
 
 
@@ -89,6 +91,7 @@
 		card = cards[i];
 		card.addEventListener("click", openCard);
 		card.addEventListener("click", openCards);
+		card.addEventListener('click',openModal);
 
 	}
 
@@ -210,7 +213,7 @@
 	function resetTime(){
 		second = 0, minute = 0; hour = 0;
 		timer.innerHTML = minute+"mins "+second+"secs";
-		clearInterval('interval');
+		clearInterval(interval);
 	}
 
 	function resetRate(){
@@ -224,4 +227,35 @@
 	restartGame.addEventListener("click", restart);
 	function restart(){
 		startGame();
+	}
+
+	function openModal(){
+		if(matchedCard.length == 16){
+			clearInterval(interval);
+			 modal.style.display = "block";
+
+			 let starFinal = document.querySelector(".stars").innerHTML;
+			 document.querySelector('.totalRating').innerHTML = starFinal ;
+
+			 let finalMove = document.querySelector(".moves").innerHTML;
+			 document.querySelector('.totalMoves').innerHTML = finalMove;
+
+			 let finalTime = document.querySelector(".timer").innerHTML;
+			 document.querySelector('.totalTime').innerHTML = finalTime;
+			 closeModal();
+		};
+	}
+
+	function closeModal(){
+    closeicon.addEventListener("click", function(e){
+        modal.style.display = "none";
+        startGame();
+    	});
+	}
+
+
+
+	function playAgain(){
+	    modal.style.display = "none";
+	    startGame();
 	}

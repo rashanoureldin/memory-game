@@ -189,8 +189,9 @@
 	
 	function startTimer(){
 		interval = setInterval(function(){
-			timer.innerHTML = minute+"mins "+second+"secs";
 			second++;
+			timer.innerHTML = minute+"mins "+second+"secs";
+			
 			if(second == 60){
 				minute++;
 				second=0;

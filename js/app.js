@@ -295,6 +295,7 @@
 			 let finalTime = document.querySelector(".timer").innerHTML;
 			 document.querySelector('.totalTime').innerHTML = finalTime;
 			 closeModal();
+			 playAgain();
 		};
 	}
 

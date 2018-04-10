@@ -1,25 +1,20 @@
 # Memory Game Project
-This is a simple game built to test a users memory. There's a deck of cards with different icons. 
 
-## Challenge
-Match cards in less time with less moves.
+## Table of Contents
 
-## How to Play
-Load this link in your browser https://rashanoureldin.github.io/memory-game/
+* [Instructions](#instructions)
+* [Contributing](#contributing)
 
 ## Instructions
-* Click on a card
-* Keep revealing cards and working your memory to remember each unveiled card.
-* Match cards properly with less moves and in faster time
 
+The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
 
-## How I built the Memory Game
-I manipulated the DOM with Vanilla JS, altered part of the HTML and also styled the game
-* created a deck of cards that shuffles when game is refreshed
-* created a counter to count the number of moves made by player and timer to know the duration of a play
-* added effects to cards when they match and are unmatched
-* create a pop-up modal when player wins game
+To get started, open `js/app.js` and start building out the app's functionality
 
-## Game dependencies
-* Font Icon : Font Awesome https://fontawesome.com/
-* Timer Function : From Sandra Israel , Fend student too. here app github link here"https://github.com/sandraisrael/Memory-Game-fend"
+For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+
+## Contributing
+
+This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+
+For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

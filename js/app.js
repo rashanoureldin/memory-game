@@ -106,16 +106,15 @@
 	function openCards(){
 		openedCards.push(this);
 		let cardLength = openedCards.length;
-
 		if (cardLength === 1) {
 			movesCounter();
 		}
 		else if(cardLength === 2){
 			
-			if(openedCards[0].innerHTML === openedCards[1].innerHTML){
-				matched();
-			}else{
+			if(openedCards[0].innerHTML != openedCards[1].innerHTML || openedCards[0].isSameNode(openedCards[1])){
 				unmatched();
+			}else{
+				matched();
 			}
 		}
 	}
@@ -186,11 +185,11 @@
  * Timer Function
  *
  */
-	
-	function startTimer(){
-		interval = setInterval(function(){
-			second++;
-			timer.innerHTML = minute+"mins "+second+"secs";
+
+ 	function timerFunc(){
+
+ 		second++;
+		timer.innerHTML = minute+"mins "+second+"secs";
 			
 			if(second == 60){
 				minute++;
@@ -200,7 +199,12 @@
 				hour++;
 				minute = 0;
 			}
-		},1000);
+	}
+
+	
+	function startTimer(){
+		timerFunc();
+		interval = setInterval(timerFunc ,1000);
 	}
 
 /**

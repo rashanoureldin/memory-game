@@ -270,11 +270,9 @@
  *
  */
 
-	restartGame.addEventListener("click", restart);
-
-	function restart(){
-		startGame();
-	}
+	restartGame.addEventListener("click", startGame);
+	// function restart(){
+	// 	startGame();
 
 /**
  *

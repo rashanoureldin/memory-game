@@ -1,28 +1,31 @@
-	/*
-	 * Create a list that holds all of your cards
-	 */
-	 
-	 let card = document.getElementsByClassName("card");
-	 let cards = [...card];
-	 const deck = document.querySelector('.deck'); 
-	 let openedCards = [];
-	 let moves = 0;
-	 let moveCounter = document.querySelector(".moves");
-	 let matchedCard = document.getElementsByClassName("match");
-	 let stars = document.querySelectorAll(".fa-star");
-	 let restartGame = document.querySelector(".restart");
-	 let second = 0, minute = 0; hour = 0;
+/**
+ *
+ * Main Variables
+ *
+ */
+
+	let card = document.getElementsByClassName("card");
+	let cards = [...card];
+	const deck = document.querySelector('.deck'); 
+	let openedCards = [];
+	let moves = 0;
+	let moveCounter = document.querySelector(".moves");
+	let matchedCard = document.getElementsByClassName("match");
+	let second = 0, minute = 0; hour = 0;
 	let timer = document.querySelector(".timer");
-	let interval;
+	let interval; 
+	let stars = document.querySelectorAll(".fa-star"); 
 	let modal = document.querySelector('.modal');
 	let closeicon = document.querySelector(".close");
+	let restartGame = document.querySelector(".restart"); 
+	let pAgain = document.querySelector(".btn.playagain");
 
-	/*
-	 * Display the cards on the page
-	 *   - shuffle the list of cards using the provided "shuffle" method below
-	 *   - loop through each card and create its HTML
-	 *   - add each card's HTML to the page
-	 */
+/**
+ *
+ * Shuffle Function
+ *
+ */
+
 
 	 startGame();
 
@@ -42,32 +45,20 @@
 		return array;
 	}
 
+/**
+ *
+ * Start Game Function
+ *
+ */
 
-
-	/*
-	 * set up the event listener for a card. If a card is clicked:
-	 *  - display the card's symbol (put this functionality in another function that you call from this one)
-	 *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-	 *  - if the list already has another card, check to see if the two cards match
-	 *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-	 *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-	 *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-	 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-	 */
-
-	 function startGame (){
-
+	function startGame (){
 	 	openedCards = [];
-
 	 	cards = shuffle(cards);
 
 	 	for (let i = 0 ;i< cards.length; i++) {
 
 	 		deck.innerHTML = "";
-
-
 	 		[].forEach.call(cards, function(item) {
-
 	 			deck.appendChild(item);
 	 		});
 
@@ -76,15 +67,26 @@
 	 	resetMoves();
 	 	resetRate();
 	 	resetTime();
-	 }
+	}
 
-	 var openCard = function(){
+/**
+ *
+ * Toggle Classes Function
+ *
+ */
+
+	var openCard = function(){
 
 	 	this.classList.toggle("open");
 	 	this.classList.toggle("show");
 
-		}
+	}
 
+/**
+ *
+ * Main Event Listener 
+ *
+ */
 
 	for (var i = 0; i < cards.length; i++){
 
@@ -95,9 +97,16 @@
 
 	}
 
+/**
+ *
+ * Open Card Function
+ *
+ */
+
 	function openCards(){
 		openedCards.push(this);
 		let cardLength = openedCards.length;
+
 		if (cardLength === 1) {
 			movesCounter();
 		}
@@ -109,56 +118,74 @@
 				unmatched();
 			}
 		}
+	}
 
+/**
+ *
+ * Match , Unmatch , Disable , Enable Functions
+ *
+ */
+
+	function matched(){
+		openedCards[0].classList.add('match','disabled');
+		openedCards[1].classList.add('match','disabled');
+		openedCards[0].classList.remove("show", "open");
+		openedCards[1].classList.remove("show", "open");
+		openedCards = [];
+	}
+
+
+	function unmatched(){
+		disabled();
+		setTimeout(function() {
+			openedCards[0].classList.remove("show", "open");
+			openedCards[1].classList.remove("show", "open");
+			enable();
+			openedCards = [];
+		}, 800);
 
 	}
 
-		function matched(){
-			openedCards[0].classList.add('match','disabled');
-			openedCards[1].classList.add('match','disabled');
-			openedCards[0].classList.remove("show", "open");
-			openedCards[1].classList.remove("show", "open");
-			openedCards = [];
+	function disabled(){
+		for(var i = 0; i < cards.length; i++){
+			card.classList.add('disabled');
 		}
-		function unmatched(){
-			disabled();
-			setTimeout(function() {
-				openedCards[0].classList.remove("show", "open");
-				openedCards[1].classList.remove("show", "open");
-				enable();
-				openedCards = [];
-			}, 800);
 
+	}
+
+	function enable(){
+		for(var i = 0; i < cards.length; i++){
+			card.classList.remove('disabled');
 		}
-		function disabled(){
-			for(var i = 0; i < cards.length; i++){
-				card.classList.add('disabled');
-			}
 
+		for(var i = 0; i < matchedCard.length; i++){
+			matchedCard[i].classList.add("disabled");
 		}
-		function enable(){
-			for(var i = 0; i < cards.length; i++){
-				card.classList.remove('disabled');
-			}
+	}
 
-			for(var i = 0; i < matchedCard.length; i++){
-				matchedCard[i].classList.add("disabled");
-			}
+/**
+ *
+ * Move Counter Function
+ *
+ */
+
+	function movesCounter(){
+		moves++;
+		moveCounter.innerHTML = moves;
+		if(moves == 1){
+			second = 0;
+			minute = 0; 
+			hour = 0;
+			startTimer();
 		}
-		function movesCounter(){
-			moves++;
-			moveCounter.innerHTML = moves;
-			if(moves == 1){
-				second = 0;
-				minute = 0; 
-				hour = 0;
-				startTimer();
-			}
-			rating();
-		}	
-	// moveCounter[0].innerHTML = moves
-	// let moveCounter = document.getElementsByClassName("moves")
+		rating();
+	}	
 
+/**
+ *
+ * Timer Function
+ *
+ */
 	
 	function startTimer(){
 		interval = setInterval(function(){
@@ -174,6 +201,12 @@
 			}
 		},1000);
 	}
+
+/**
+ *
+ * Rating Function
+ *
+ */
 
 
 	function rating(){
@@ -205,6 +238,13 @@
 		}
 	}
 
+/**
+ *
+ * Reset Moves , Time and Rate Functions
+ *
+ */
+		
+
 	function resetMoves(){
 		moves = 0;
 		moveCounter.innerHTML = moves;
@@ -224,10 +264,23 @@
 		}
 	}
 
+/**
+ *
+ * Restart Button Function
+ *
+ */
+
 	restartGame.addEventListener("click", restart);
+
 	function restart(){
 		startGame();
 	}
+
+/**
+ *
+ * Modal
+ *
+ */
 
 	function openModal(){
 		if(matchedCard.length == 16){
@@ -247,15 +300,15 @@
 	}
 
 	function closeModal(){
-    closeicon.addEventListener("click", function(e){
-        modal.style.display = "none";
-        startGame();
+    	closeicon.addEventListener("click", function(e){
+	        modal.style.display = "none";
+	        startGame();
     	});
 	}
 
-
-
 	function playAgain(){
-	    modal.style.display = "none";
-	    startGame();
+	    pAgain.addEventListener("click" , function(e){
+	    	modal.style.display = "none";
+	   		startGame();
+	    });
 	}

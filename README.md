@@ -19,3 +19,7 @@ I manipulated the DOM with Vanilla JS, altered part of the HTML and also styled 
 * created a counter to count the number of moves made by player and timer to know the duration of a play
 * added effects to cards when they match and are unmatched
 * create a pop-up modal when player wins game
+
+## Game dependencies
+* Font Icon : Font Awesome https://fontawesome.com/
+* Timer Function : From Sandra Israel , Fend student too. here app github link here"https://github.com/sandraisrael/Memory-Game-fend"

@@ -104,18 +104,17 @@
  */
 
 	function openCards(){
+
 		openedCards.push(this);
+
 		let cardLength = openedCards.length;
 
-		if (cardLength === 1) {
-			movesCounter();
-		}
-		else if(cardLength === 2){
-			
-			if(openedCards[0].innerHTML === openedCards[1].innerHTML){
-				matched();
-			}else{
+		if(cardLength === 2){
+
+			if(openedCards[0].innerHTML != openedCards[1].innerHTML || openedCards[0].isSameNode(openedCards[1])){
 				unmatched();
+			}else{
+				matched();
 			}
 		}
 	}
@@ -189,8 +188,8 @@
 	
 	function startTimer(){
 		interval = setInterval(function(){
-			timer.innerHTML = minute+"mins "+second+"secs";
 			second++;
+			timer.innerHTML = minute+"mins "+second+"secs";			
 			if(second == 60){
 				minute++;
 				second=0;
